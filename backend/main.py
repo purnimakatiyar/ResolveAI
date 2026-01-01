@@ -1,15 +1,10 @@
-from typing import Union
-
 from fastapi import FastAPI
+from api.v1.auth import router as auth_router
 
-app = FastAPI()
+app = FastAPI(title="ResolveAI Backend")
 
+app.include_router(auth_router)
 
 @app.get("/")
-def read_root():
-    return {"Hello": "World"}
-
-
-@app.get("/items/{item_id}")
-def read_item(item_id: int, q: Union[str, None] = None):
-    return {"item_id": item_id, "q": q}
+def health():
+    return {"status": "ok"}
