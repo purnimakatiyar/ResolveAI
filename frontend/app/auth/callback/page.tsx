@@ -3,20 +3,14 @@
 import { supabase } from "@/lib/supabaseClient";
 import { useEffect } from "react";
 
-export default function HomePage() {
+export default function CallbackPage() {
   useEffect(() => {
     supabase.auth.getSession().then(({ data }) => {
       if (data.session) {
         window.location.href = "/dashboard";
-      } else {
-        window.location.href = "/auth/login";
       }
     });
   }, []);
 
-  return (
-    <div className="flex min-h-screen items-center justify-center text-zinc-500">
-      Loading...
-    </div>
-  );
+  return <p className="p-10">Signing you in...</p>;
 }
