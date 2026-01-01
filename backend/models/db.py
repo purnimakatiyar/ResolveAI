@@ -1,13 +1,11 @@
-from sqlalchemy import Column, String, Integer, DateTime, ForeignKey
+from sqlalchemy import Column, String, DateTime, ForeignKey
 from sqlalchemy.dialects.postgresql import UUID
 from sqlalchemy.orm import declarative_base
 from sqlalchemy.sql import func
 import uuid
 
-# 🔴 Base MUST be defined BEFORE models
-Base = declarative_base()
 
-# ✅ MODELS MUST BE AT TOP LEVEL (NOT INSIDE FUNCTIONS)
+Base = declarative_base()
 
 class Tenant(Base):
     __tablename__ = "tenants"
