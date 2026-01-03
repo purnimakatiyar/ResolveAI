@@ -34,3 +34,8 @@ pyyaml>=6.0
 certifi
 urllib3
 idna
+supabase
+celery
+redis
+google-generativeai
+python-jose[cryptography]

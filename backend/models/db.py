@@ -55,6 +55,38 @@ class TicketMessage(Base):
 
     id = Column(UUID(as_uuid=True), primary_key=True, default=uuid.uuid4)
     ticket_id = Column(UUID(as_uuid=True), ForeignKey("tickets.id"), nullable=False)
-    sender_type = Column(String)
+
+    sender_type = Column(String)  # customer | agent | ai
+    sender_id = Column(UUID(as_uuid=True), nullable=True)
+
     message = Column(Text, nullable=False)
+
     created_at = Column(DateTime(timezone=True), server_default=func.now())
+
+
+class AIResponse(Base):
+    __tablename__ = "ai_responses"
+
+    id = Column(UUID(as_uuid=True), primary_key=True, default=uuid.uuid4)
+    ticket_id = Column(UUID(as_uuid=True), ForeignKey("tickets.id"))
+
+    draft_response = Column(Text)
+    confidence_score = Column(Integer)
+    reasoning = Column(Text)
+
+    was_approved = Column(Boolean, default=False)
+    edited_by_agent = Column(Boolean, default=False)
+
+    created_at = Column(DateTime(timezone=True), server_default=func.now())
+
+class SLATracker(Base):
+    __tablename__ = "sla_trackers"
+
+    id = Column(UUID(as_uuid=True), primary_key=True, default=uuid.uuid4)
+    ticket_id = Column(UUID(as_uuid=True), ForeignKey("tickets.id"))
+
+    first_response_deadline = Column(DateTime)
+    resolution_deadline = Column(DateTime)
+
+    breached = Column(Boolean, default=False)
+
