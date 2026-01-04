@@ -11,7 +11,7 @@ def draft_ai_response(ticket_id: str, user=Depends(get_current_user)):
     generate_ai_draft_task.delay(ticket_id)
     return {
         "status": "queued",
-        "message": "AI draft generation started"
+        "message": "AI draft generation started successfully."
     }
 
 
@@ -27,7 +27,7 @@ def approve_ai_response(ticket_id: str, user=Depends(get_current_user)):
     )
 
     if not ai_response:
-        return {"error": "No AI response found"}
+        return {"error": "No AI response found."}
 
     ai_response.was_approved = True
 
