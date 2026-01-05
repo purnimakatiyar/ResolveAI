@@ -13,7 +13,7 @@ from schemas.ticket import (
 from services.tickets_service import create_ticket, add_message
 from models.db import Ticket, TicketMessage
 
-router = APIRouter(prefix="/tickets", tags=["Tickets"])
+router = APIRouter(prefix="/api/tickets", tags=["Tickets"])
 
 
 @router.post("/", response_model=TicketResponse)
