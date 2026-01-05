@@ -1,11 +1,14 @@
 from celery import Celery
+import os
+
+REDIS_URL = os.getenv("REDIS_URL", "redis://redis:6379/0")
 
 celery_app = Celery(
     "resolveai",
-    broker="redis://localhost:6379/0",
-    backend="redis://localhost:6379/0",
+    broker=REDIS_URL,
+    backend=REDIS_URL,
 )
 
 celery_app.conf.task_routes = {
-    "app.workers.ai_tasks.*": {"queue": "ai"},
+    "workers.ai_tasks.*": {"queue": "ai"},
 }
