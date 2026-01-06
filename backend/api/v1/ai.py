@@ -37,4 +37,7 @@ def approve_ai_response(ticket_id: str, user=Depends(get_current_user)):
     db.commit()
     db.close()
 
-    return {"status": "approved"}
+    return {
+        "status": "approved",
+        "message": "AI response approved successfully."
+    }
