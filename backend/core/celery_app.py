@@ -10,5 +10,7 @@ celery_app = Celery(
 )
 
 celery_app.conf.task_routes = {
-    "workers.ai_tasks.*": {"queue": "ai"},
+    "core.*": {"queue": "ai"},
 }
+
+import core.ai_tasks
