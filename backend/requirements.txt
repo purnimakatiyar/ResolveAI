@@ -37,5 +37,5 @@ idna
 supabase
 celery
 redis
-google-generativeai
+google-genai
 python-jose[cryptography]

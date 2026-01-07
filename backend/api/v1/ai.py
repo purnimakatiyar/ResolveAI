@@ -1,10 +1,10 @@
 from fastapi import APIRouter, Depends
-from workers.ai_tasks import generate_ai_draft_task
+from core.ai_tasks import generate_ai_draft_task
 from dependencies.auth import get_current_user
 from models.db import AIResponse, Ticket
 from db.session import SessionLocal
 
-router = APIRouter(prefix="/tickets")
+router = APIRouter(prefix="/api/tickets")
 
 @router.post("/{ticket_id}/ai/draft")
 def draft_ai_response(ticket_id: str, user=Depends(get_current_user)):

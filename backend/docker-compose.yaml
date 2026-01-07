@@ -17,11 +17,13 @@ services:
   celery:
     build: .
     container_name: resolveai_celery
-    command: celery -A core.celery_app.celery_app worker -Q ai --loglevel=info
+    command: celery -A core.celery_app worker -Q ai --loglevel=info
     volumes:
       - .:/app
     env_file:
       - .env
+    environment:
+      - PYTHONPATH=/app
     depends_on:
       - redis
 
