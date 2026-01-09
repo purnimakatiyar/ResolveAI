@@ -3,8 +3,8 @@
 import { useState } from "react";
 import { Mail, Lock } from "lucide-react";
 import { supabase } from "@/lib/supabaseClient";
-import AuthLayout from "@/components/AuthLayout";
-import AuthCard from "@/components/AuthCard";
+import AuthLayout from "@/components/auth/AuthLayout";
+import AuthCard from "@/components/auth/AuthCard";
 import Input from "@/components/Input";
 import { PrimaryButton, SecondaryButton } from "@/components/Button";
 
