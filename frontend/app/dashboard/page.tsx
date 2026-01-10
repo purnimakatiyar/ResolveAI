@@ -1,6 +1,3 @@
-// ============================================
-// FILE: app/dashboard/page.tsx
-// ============================================
 "use client";
 
 import { useState, useEffect } from "react";
@@ -84,7 +81,7 @@ export default function DashboardPage() {
   return (
     <div className="min-h-screen bg-gradient-to-br from-purple-50 via-pink-50 to-blue-50 dark:from-gray-950 dark:via-purple-950/20 dark:to-gray-950 transition-colors duration-500">
       <div className="max-w-7xl mx-auto px-4 py-8">
-        {/* Header */}
+
         <div className="mb-8">
           <h1 className="text-4xl font-bold bg-gradient-to-r from-purple-600 to-pink-600 dark:from-purple-400 dark:to-pink-400 bg-clip-text text-transparent mb-2">
             Support Dashboard
@@ -94,7 +91,6 @@ export default function DashboardPage() {
           </p>
         </div>
 
-        {/* View Mode Toggle */}
         <div className="flex items-center gap-3 mb-6">
           <button
             onClick={() => setViewMode("tickets")}
@@ -120,7 +116,6 @@ export default function DashboardPage() {
           </button>
         </div>
 
-        {/* Stats Cards */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-8">
           <div className="p-6 rounded-xl bg-white dark:bg-gray-900/50 border-2 border-gray-200 dark:border-gray-700 backdrop-blur-xl">
             <div className="text-sm text-gray-600 dark:text-gray-400 mb-1">Total Tickets</div>
@@ -140,14 +135,12 @@ export default function DashboardPage() {
           </div>
         </div>
 
-        {/* Conditional Content Based on View Mode */}
+
         {viewMode === "analytics" ? (
-          // Analytics View
+
           <AnalyticsDashboard tickets={tickets} />
         ) : (
-          // Tickets View
           <>
-            {/* Filters and Search */}
             <div className="flex flex-col sm:flex-row gap-4 mb-6">
               <div className="flex-1">
                 <Input
@@ -176,7 +169,6 @@ export default function DashboardPage() {
               </PrimaryButton>
             </div>
 
-            {/* Tickets Grid */}
             {loading ? (
               <div className="flex justify-center items-center py-20">
                 <div className="w-12 h-12 border-4 border-purple-500/30 border-t-purple-500 rounded-full animate-spin" />
@@ -214,7 +206,6 @@ export default function DashboardPage() {
         )}
       </div>
 
-      {/* Modals */}
       <CreateTicketModal
         isOpen={isCreateModalOpen}
         onClose={() => setIsCreateModalOpen(false)}

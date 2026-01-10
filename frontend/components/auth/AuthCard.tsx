@@ -10,7 +10,6 @@ interface AuthCardProps {
 export default function AuthCard({ title, subtitle, children }: AuthCardProps) {
   return (
     <div className="relative group">
-      {/* Glow effect */}
       <div className="absolute -inset-0.5 bg-gradient-to-r from-purple-600 to-pink-600 rounded-2xl blur opacity-20 group-hover:opacity-30 transition duration-1000 group-hover:duration-200 animate-pulse" />
       
       <div className="relative rounded-2xl border border-gray-200 dark:border-white/10 bg-white/80 dark:bg-gray-900/80 backdrop-blur-2xl shadow-2xl p-8 sm:p-10">

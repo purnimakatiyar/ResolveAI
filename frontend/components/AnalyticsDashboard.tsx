@@ -1,6 +1,3 @@
-// ============================================
-// FILE: components/AnalyticsDashboard.tsx
-// ============================================
 "use client";
 
 import { useMemo } from "react";
@@ -45,14 +42,14 @@ const COLORS = {
 
 export default function AnalyticsDashboard({ tickets }: AnalyticsDashboardProps) {
   const analytics = useMemo(() => {
-    // Calculate metrics
+
     const total = tickets.length;
     const open = tickets.filter((t) => t.status === "open").length;
     const inProgress = tickets.filter((t) => t.status === "in_progress").length;
     const closed = tickets.filter((t) => t.status === "closed").length;
     const closedRate = total > 0 ? ((closed / total) * 100).toFixed(1) : "0";
 
-    // Priority distribution
+
     const priorityData = [
       { name: "Low", value: tickets.filter((t) => t.priority === "low").length, color: COLORS.low },
       { name: "Medium", value: tickets.filter((t) => t.priority === "medium").length, color: COLORS.medium },
@@ -60,14 +57,12 @@ export default function AnalyticsDashboard({ tickets }: AnalyticsDashboardProps)
       { name: "Urgent", value: tickets.filter((t) => t.priority === "urgent").length, color: COLORS.urgent },
     ];
 
-    // Status distribution
     const statusData = [
       { name: "Open", value: open, color: COLORS.open },
       { name: "In Progress", value: inProgress, color: COLORS.in_progress },
       { name: "Closed", value: closed, color: COLORS.closed },
     ];
 
-    // Tickets created over last 7 days
     const last7Days = Array.from({ length: 7 }, (_, i) => {
       const date = new Date();
       date.setDate(date.getDate() - (6 - i));
@@ -83,7 +78,6 @@ export default function AnalyticsDashboard({ tickets }: AnalyticsDashboardProps)
       };
     });
 
-    // Average resolution time (for closed tickets)
     const closedTickets = tickets.filter((t) => t.status === "closed");
     const avgResolutionHours = closedTickets.length > 0
       ? closedTickets.reduce((sum, t) => {
@@ -93,7 +87,7 @@ export default function AnalyticsDashboard({ tickets }: AnalyticsDashboardProps)
         }, 0) / closedTickets.length
       : 0;
 
-    // Response time by priority
+
     const responseTimeData = [
       {
         priority: "Low",
@@ -137,11 +131,10 @@ export default function AnalyticsDashboard({ tickets }: AnalyticsDashboardProps)
       },
     ];
 
-    // Assigned vs Unassigned tickets
+
     const assignedCount = tickets.filter((t) => t.assigned_to).length;
     const unassignedCount = tickets.filter((t) => !t.assigned_to).length;
 
-    // Tickets with customers vs without
     const withCustomer = tickets.filter((t) => t.customer_id).length;
     const withoutCustomer = tickets.filter((t) => !t.customer_id).length;
 
@@ -165,7 +158,7 @@ export default function AnalyticsDashboard({ tickets }: AnalyticsDashboardProps)
 
   return (
     <div className="space-y-6">
-      {/* Key Metrics */}
+
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
         <MetricCard
           title="Total Tickets"
@@ -194,9 +187,9 @@ export default function AnalyticsDashboard({ tickets }: AnalyticsDashboardProps)
         />
       </div>
 
-      {/* Charts Grid */}
+
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-        {/* Ticket Trends */}
+
         <ChartCard title="Ticket Trends (Last 7 Days)">
           <ResponsiveContainer width="100%" height={300}>
             <LineChart data={analytics.ticketTrends}>
@@ -235,7 +228,6 @@ export default function AnalyticsDashboard({ tickets }: AnalyticsDashboardProps)
           </ResponsiveContainer>
         </ChartCard>
 
-        {/* Priority Distribution */}
         <ChartCard title="Priority Distribution">
           <ResponsiveContainer width="100%" height={300}>
             <PieChart>
@@ -260,7 +252,6 @@ export default function AnalyticsDashboard({ tickets }: AnalyticsDashboardProps)
           </ResponsiveContainer>
         </ChartCard>
 
-        {/* Status Distribution */}
         <ChartCard title="Status Distribution">
           <ResponsiveContainer width="100%" height={300}>
             <BarChart data={analytics.statusData}>
@@ -283,7 +274,6 @@ export default function AnalyticsDashboard({ tickets }: AnalyticsDashboardProps)
           </ResponsiveContainer>
         </ChartCard>
 
-        {/* Response Time by Priority */}
         <ChartCard title="Avg Resolution Time by Priority">
           <ResponsiveContainer width="100%" height={300}>
             <BarChart data={analytics.responseTimeData}>
@@ -304,7 +294,6 @@ export default function AnalyticsDashboard({ tickets }: AnalyticsDashboardProps)
         </ChartCard>
       </div>
 
-      {/* Additional Metrics Row */}
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
         <div className="p-6 rounded-xl bg-white dark:bg-gray-900/50 border-2 border-gray-200 dark:border-gray-700">
           <h3 className="text-sm font-semibold text-gray-600 dark:text-gray-400 mb-4">Assignment Status</h3>
@@ -338,7 +327,6 @@ export default function AnalyticsDashboard({ tickets }: AnalyticsDashboardProps)
   );
 }
 
-// Metric Card Component
 interface MetricCardProps {
   title: string;
   value: string | number;
@@ -373,7 +361,6 @@ function MetricCard({ title, value, icon: Icon, color, trend }: MetricCardProps)
   );
 }
 
-// Chart Card Component
 interface ChartCardProps {
   title: string;
   children: React.ReactNode;
